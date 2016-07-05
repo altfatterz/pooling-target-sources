@@ -27,15 +27,13 @@ public class PoolingTargetSourcesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Foo fo1 = applicationContext.getBean("foo", Foo.class);
+		Foo foo1 = applicationContext.getBean("foo", Foo.class);
+		Foo foo2 = applicationContext.getBean("foo", Foo.class);
 
-		Foo fo2 = applicationContext.getBean("foo", Foo.class);
+		System.out.println(foo1);
+		System.out.println(foo2);
 
-		Foo fo3 = applicationContext.getBean("foo", Foo.class);
-
-		System.out.println("Put breakpoint here");
 	}
-
 
 	static class Foo {
 	}
@@ -52,7 +50,7 @@ public class PoolingTargetSourcesApplication implements CommandLineRunner {
 		CommonsPool2TargetSource pooledObjectFactory = new CommonsPool2TargetSource() {
 			@Override
 			public Object getTarget() throws Exception {
-				logger.info("borrow object from pool");
+				System.out.println("borrow object from pool");
 				return super.getTarget();
 			}
 		};
